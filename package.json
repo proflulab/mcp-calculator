@@ -1,0 +1,33 @@
+{
+  "name": "mcp-calculator",
+  "version": "1.0.0",
+  "description": "MCP Calculator Server with basic arithmetic operations",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "calculator": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/index.js",
+    "start": "npm run build && node build/index.js",
+    "dev": "tsc --watch"
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "mcp",
+    "calculator",
+    "arithmetic"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
