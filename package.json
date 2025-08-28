@@ -1,6 +1,6 @@
 {
   "name": "mcp-calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP Calculator Server with basic arithmetic operations",
   "type": "module",
   "main": "build/index.js",
@@ -10,7 +10,14 @@
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
     "start": "npm run build && node build/index.js",
-    "dev": "tsc --watch"
+    "dev": "tsc --watch",
+    "test": "npm run build && node tests/test.js",
+    "test:extended": "npm run build && node tests/test_extended.js",
+    "test:logarithm": "npm run build && node tests/test_logarithm.cjs",
+    "test:roots": "npm run build && node tests/test_roots.js",
+    "test:trigonometry": "npm run build && node tests/test_trigonometry.cjs",
+    "test:all": "npm run test && npm run test:extended && npm run test:logarithm && npm run test:roots && npm run test:trigonometry",
+    "test:suite": "node tests/run-all-tests.js"
   },
   "files": [
     "build"
