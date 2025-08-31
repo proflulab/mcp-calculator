@@ -1,7 +1,7 @@
 {
   "name": "mcp-calculator",
   "version": "1.0.1",
-  "description": "MCP Calculator Server with basic arithmetic operations",
+  "description": "A comprehensive MCP Calculator Server with 19 mathematical tools including arithmetic, trigonometric, logarithmic functions and advanced operations",
   "type": "module",
   "main": "build/index.js",
   "bin": {
@@ -25,9 +25,15 @@
   "keywords": [
     "mcp",
     "calculator",
-    "arithmetic"
+    "arithmetic",
+    "mathematics",
+    "trigonometry",
+    "logarithm",
+    "model-context-protocol",
+    "typescript",
+    "math-tools"
   ],
-  "author": "Your Name",
+  "author": "MCP Calculator Team",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",
