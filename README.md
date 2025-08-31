@@ -1,18 +1,54 @@
 # MCP Calculator Server
 
+[![npm version](https://badge.fury.io/js/mcp-calculator.svg)](https://badge.fury.io/js/mcp-calculator)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?logo=node.js&logoColor=white)](https://nodejs.org/)
+
 一个功能完整的基于 Model Context Protocol (MCP) 的计算器服务器，提供丰富的数学运算功能，包括基础算术、高级数学函数、三角函数和对数运算。
 
-## 🚀 快速开始
+## 📦 安装
+
+### 通过 npm 安装（推荐）
+
+```bash
+# 全局安装
+npm install -g mcp-calculator
+
+# 或者本地安装
+npm install mcp-calculator
+```
+
+### 从源码安装
 
 ```bash
 # 克隆项目
-git clone <repository-url>
-cd mcp_calculator
+git clone https://github.com/your-username/mcp-calculator.git
+cd mcp-calculator
 
 # 安装依赖
 npm install
 
 # 构建并启动
+npm start
+```
+
+## 🚀 快速开始
+
+### 全局安装后使用
+
+```bash
+# 直接启动服务器
+calculator
+```
+
+### 本地安装后使用
+
+```bash
+# 使用 npx 运行
+npx mcp-calculator
+
+# 或者通过 npm scripts
 npm start
 ```
 
@@ -132,25 +168,55 @@ npm run test:all
 
 ### 在 MCP 客户端中使用
 
-1. **配置 MCP 客户端**
-   将服务器添加到你的 MCP 客户端配置中：
+#### 全局安装配置
 
-   ```json
-   {
-     "mcpServers": {
-       "calculator": {
-         "command": "node",
-         "args": ["/path/to/mcp_calculator/build/index.js"]
-       }
-     }
-   }
-   ```
+如果你已经全局安装了 `mcp-calculator`，可以这样配置：
 
-2. **使用计算器功能**
-   - 基础运算："计算 15 + 27"
-   - 复杂运算："计算 sin(π/4) 的值"
-   - 对数运算："计算 log₂(16)"
-   - 开方运算："计算 ∛125"
+```json
+{
+  "mcpServers": {
+    "calculator": {
+      "command": "calculator"
+    }
+  }
+}
+```
+
+#### 本地安装配置
+
+如果你是本地安装或从源码构建，可以这样配置：
+
+```json
+{
+  "mcpServers": {
+    "calculator": {
+      "command": "node",
+      "args": ["/path/to/mcp_calculator/build/index.js"]
+    }
+  }
+}
+```
+
+#### 使用 npx 配置
+
+```json
+{
+  "mcpServers": {
+    "calculator": {
+      "command": "npx",
+      "args": ["mcp-calculator"]
+    }
+  }
+}
+```
+
+### 计算器功能示例
+
+- **基础运算**："计算 15 + 27"
+- **三角函数**："计算 sin(π/4) 的值"
+- **对数运算**："计算 log₂(16)"
+- **开方运算**："计算 ∛125"
+- **复合运算**："计算 2^3 + √16 - ln(e)"
 
 ### 命令行直接使用
 
@@ -160,6 +226,23 @@ node build/index.js
 
 # 在另一个终端发送请求
 echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"add","arguments":{"a":10,"b":5}}}' | node build/index.js
+```
+
+### 安装验证
+
+安装完成后，你可以通过以下方式验证安装是否成功：
+
+```bash
+# 检查版本
+npm list mcp-calculator
+
+# 运行测试（如果是从源码安装）
+npm run test:all
+
+# 启动服务器测试
+calculator  # 全局安装
+# 或
+npx mcp-calculator  # 本地安装
 ```
 
 ## 可用工具
@@ -461,7 +544,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"add","argu
 ## 📁 项目结构
 
 ```text
-mcp_calculator/
+mcp-calculator/
 ├── src/
 │   └── index.ts              # 主服务器文件
 ├── tests/                    # 测试文件目录
@@ -469,12 +552,15 @@ mcp_calculator/
 │   ├── test_extended.js      # 扩展功能测试
 │   ├── test_roots.js         # 开方功能测试
 │   ├── test_trigonometry.cjs # 三角函数测试
-│   └── test_logarithm.cjs    # 对数函数测试
-├── build/                    # 编译输出目录
-├── package.json              # 项目配置
-├── tsconfig.json             # TypeScript 配置
+│   ├── test_logarithm.cjs    # 对数函数测试
+│   └── run-all-tests.js      # 测试套件运行器
+├── build/                    # 编译输出目录（发布到npm）
+├── package.json              # 项目配置和依赖
+├── package-lock.json         # 锁定依赖版本
+├── tsconfig.json             # TypeScript 编译配置
+├── .gitignore                # Git 忽略文件配置
 ├── LICENSE                   # MIT 许可证
-└── README.md                 # 项目说明
+└── README.md                 # 项目说明文档
 ```
 
 ## 📜 开发脚本
@@ -577,8 +663,22 @@ DEBUG=* node build/index.js
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
 
+## 📋 版本信息
+
+当前版本：**v1.0.1**
+
+### 版本历史
+
+- **v1.0.1** - 初始发布版本
+  - 支持19个数学运算工具
+  - 完整的错误处理机制
+  - 100%测试覆盖率
+  - npm包发布
+
 ## 🔗 相关链接
 
+- **npm 包**: [mcp-calculator](https://www.npmjs.com/package/mcp-calculator)
+- **GitHub 仓库**: [mcp-calculator](https://github.com/your-username/mcp-calculator)
 - [Model Context Protocol 官方文档](https://modelcontextprotocol.io/)
 - [MCP TypeScript SDK](https://github.com/modelcontextprotocol/typescript-sdk)
 - [Zod 验证库](https://github.com/colinhacks/zod)
@@ -589,6 +689,49 @@ DEBUG=* node build/index.js
 - **4** 个功能分类（基础运算、扩展运算、三角函数、对数函数）
 - **100%** 测试覆盖率
 - **完整** 的错误处理机制
+- **TypeScript** 类型安全
+- **零依赖运行时**（仅开发依赖）
+
+## 🚀 性能特性
+
+- **轻量级**: 编译后体积小，启动快速
+- **内存高效**: 低内存占用，适合长期运行
+- **类型安全**: 完整的 TypeScript 类型定义
+- **错误恢复**: 单个计算错误不影响服务器运行
+
+## 📚 API 参考
+
+### 工具分类
+
+| 分类 | 工具数量 | 工具名称 |
+|------|----------|----------|
+| 基础运算 | 4 | `add`, `subtract`, `multiply`, `divide` |
+| 扩展运算 | 6 | `modulo`, `power`, `sqrt`, `abs`, `cbrt`, `nthRoot` |
+| 三角函数 | 6 | `sin`, `cos`, `tan`, `asin`, `acos`, `atan` |
+| 对数函数 | 3 | `ln`, `log10`, `log` |
+
+### 错误类型
+
+| 错误类型 | 触发条件 | 示例 |
+|----------|----------|------|
+| 除零错误 | 除数为0 | `divide(10, 0)` |
+| 数学域错误 | 负数开偶次方根 | `sqrt(-4)` |
+| 范围错误 | 反三角函数输入超出[-1,1] | `asin(2)` |
+| 参数错误 | 对数函数输入非正数 | `ln(-1)` |
+
+### 返回格式
+
+所有工具调用都返回统一的格式：
+
+```typescript
+interface ToolResult {
+  content: [{
+    type: "text";
+    text: string;
+  }];
+  isError?: boolean;
+}
+```
 
 ---
 
