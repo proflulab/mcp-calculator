@@ -1,46 +1,82 @@
 {
   "name": "mcp-calculator",
-  "version": "1.0.1",
-  "description": "A comprehensive MCP Calculator Server with 19 mathematical tools including arithmetic, trigonometric, logarithmic functions and advanced operations",
+  "version": "1.0.2",
+  "description": "A comprehensive MCP (Model Context Protocol) Calculator Server with 31 mathematical tools including arithmetic, trigonometric, logarithmic functions and advanced operations. Perfect for AI assistants and mathematical computations.",
   "type": "module",
   "main": "build/index.js",
+  "types": "build/index.d.ts",
   "bin": {
-    "calculator": "./build/index.js"
+    "mcp-calculator": "./build/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proflulab/mcp-calculator.git"
+  },
+  "homepage": "https://github.com/proflulab/mcp-calculator#readme",
+  "bugs": {
+    "url": "https://github.com/proflulab/mcp-calculator/issues"
   },
   "scripts": {
     "build": "tsc && chmod 755 build/index.js",
     "start": "npm run build && node build/index.js",
     "dev": "tsc --watch",
-    "test": "npm run build && node tests/test.js",
-    "test:extended": "npm run build && node tests/test_extended.js",
-    "test:logarithm": "npm run build && node tests/test_logarithm.cjs",
-    "test:roots": "npm run build && node tests/test_roots.js",
-    "test:trigonometry": "npm run build && node tests/test_trigonometry.cjs",
-    "test:all": "npm run test && npm run test:extended && npm run test:logarithm && npm run test:roots && npm run test:trigonometry",
-    "test:suite": "node tests/run-all-tests.js"
+    "test": "node tests/scripts/run-tests.js",
+    "test:unit": "node tests/scripts/run-tests.js unit",
+    "test:integration": "node tests/scripts/run-tests.js integration",
+    "test:performance": "node tests/scripts/run-tests.js performance",
+    "test:coverage": "node tests/scripts/run-tests.js --coverage",
+    "test:watch": "node tests/scripts/run-tests.js --watch",
+    "test:ci": "node tests/scripts/run-tests.js --coverage --bail",
+    "test:all": "node tests/scripts/run-tests.js all",
+    "lint": "eslint src tests --ext .ts",
+    "lint:fix": "eslint src tests --ext .ts --fix",
+    "clean": "rimraf build tests/coverage",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && npm run build && npm run test:ci"
   },
   "files": [
-    "build"
+    "build/**/*",
+    "README.md",
+    "LICENSE"
   ],
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "calculator",
-    "arithmetic",
     "mathematics",
+    "arithmetic",
     "trigonometry",
     "logarithm",
-    "model-context-protocol",
+    "math-tools",
     "typescript",
-    "math-tools"
+    "ai-assistant",
+    "computational-tools",
+    "scientific-calculator",
+    "math-server",
+    "mathematical-functions"
   ],
-  "author": "MCP Calculator Team",
+  "author": {
+    "name": "杨仕明",
+    "email": "shiming.y@qq.com"
+  },
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.17.4",
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^30.1.1",
+    "rimraf": "^5.0.0",
+    "ts-jest": "^29.4.1",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.9.2"
   }
 }
